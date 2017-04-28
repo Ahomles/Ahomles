@@ -1,0 +1,14 @@
+1.错误1
+	git -c diff.mnemonicprefix=false -c core.quotepath=false fetch origin
+	git -c diff.mnemonicprefix=false -c core.quotepath=false pull --no-commit origin dev
+	You have not concluded your merge (MERGE_HEAD exists).
+	Please, commit your changes before you can merge.
+	原因：错误可能是因为在你以前pull下来的代码没有自动合并导致的.
+	解决方式：
+	>>>强推 ：git push -f
+	1>保留你本地的修改
+	git merge --abort
+	git reset --merge
+	2>==git pull
+	git fetch
+	git merge
