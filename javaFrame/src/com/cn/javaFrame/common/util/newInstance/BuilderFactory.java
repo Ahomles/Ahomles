@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BuilderFactory {
-	 //»ñµÃ´´½¨ÕßµÄ±¾µØ·½·¨
+	 //è·å¾—åˆ›å»ºè€…çš„æœ¬åœ°æ–¹æ³•
     private static Map<String , Method> builderMethod= new ConcurrentHashMap<String , Method>();
                                                                                                                                                       
     static {
@@ -27,6 +27,6 @@ public class BuilderFactory {
     	if(method!=null){
     		return (T) method.invoke(null);
     	}
-    	throw new RuntimeException("Ã»ÓĞÕâÖÖ´´½¨¶ÔÏóµÄ¹¹Ôì·½·¨");
+    	throw new RuntimeException("æ²¡æœ‰è¿™ç§åˆ›å»ºå¯¹è±¡çš„æ„é€ æ–¹æ³•");
     }
 }

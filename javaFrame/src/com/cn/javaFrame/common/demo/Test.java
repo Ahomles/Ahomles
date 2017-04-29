@@ -5,7 +5,7 @@ public class Test {
 	
 	
 	public void test01(){
-		//²âÊÔÌá½»
-	}
+		//æµ‹è¯•æäº¤	
+		}
 	
 }

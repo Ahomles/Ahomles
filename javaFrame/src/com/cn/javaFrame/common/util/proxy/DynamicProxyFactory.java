@@ -7,12 +7,12 @@ import java.util.Set;
 
 public class DynamicProxyFactory {
 		/**
-		 * ¶¯Ì¬´úÀí¹¤³§
+		 * åŠ¨æ€ä»£ç†å·¥å‚
 		 * @param obj
 		 * @param interceptors
 		 * @return
 		 */
-		//¶¯Ì¬´úÀí¹¤³§
+		//åŠ¨æ€ä»£ç†å·¥å‚
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public static <T> T getProxyInstance(T obj ,List<IInterceptor> interceptors){
 			DynamicProxy handler=new DynamicProxy(interceptors,obj);
@@ -22,7 +22,7 @@ public class DynamicProxyFactory {
 		}
 	
 		/**
-		 * »ñÈ¡´úÀí¶ÔÏóÊµÏÖµÄËùÓÃ½Ó¿Ú
+		 * è·å–ä»£ç†å¯¹è±¡å®ç°çš„æ‰€ç”¨æ¥å£
 		 * @param clazz
 		 * @return
 		 */

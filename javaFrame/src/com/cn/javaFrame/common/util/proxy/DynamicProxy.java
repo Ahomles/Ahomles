@@ -22,7 +22,7 @@ public class DynamicProxy implements InvocationHandler {
 		if (filterInterceptors != null && !filterInterceptors.isEmpty()) {
 			return method.invoke(obj, args);
 		}
-		// 方法前置动作：拦截器
+		// 鏂规硶鍓嶇疆鍔ㄤ綔锛氭嫤鎴櫒
 		for (IInterceptor interceptor : filterInterceptors) {
 			try {
 				interceptor.beforeInvoke(obj, method);
@@ -33,8 +33,8 @@ public class DynamicProxy implements InvocationHandler {
 		Object rtn = null;
 		try {
 			rtn = method.invoke(obj, args);
-		} catch (InvocationTargetException ex) {//调用异常
-			// 异常处理：拦截器
+		} catch (InvocationTargetException ex) {//璋冪敤寮傚父
+			// 寮傚父澶勭悊锛氭嫤鎴櫒
 			for (IInterceptor interceptor : filterInterceptors) {
 				try {
 					interceptor.exceptionHandle(obj, method);
@@ -43,14 +43,14 @@ public class DynamicProxy implements InvocationHandler {
 				}
 			}
 			throw ex;
-		} catch (IllegalArgumentException ex) {//参数异常
+		} catch (IllegalArgumentException ex) {//鍙傛暟寮傚父
 			throw new Exception(
 					"AOP configuration seems to be invalid: tried calling method ["
 							+ method + "] on target [" + obj + "]", ex);
-		} catch (IllegalAccessException ex) {//权限异常
+		} catch (IllegalAccessException ex) {//鏉冮檺寮傚父
 			throw new Exception("Could not access method [" + method + "]", ex);
 		}
-		//后置动作
+		//鍚庣疆鍔ㄤ綔
 		for (IInterceptor interceptor : filterInterceptors) {
 			try {
 				interceptor.afterInvoke(obj, method);

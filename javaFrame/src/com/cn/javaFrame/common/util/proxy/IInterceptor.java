@@ -4,14 +4,14 @@ import java.lang.reflect.Method;
 
 public interface IInterceptor {
 	/**
-	 * 方法后置动作
+	 * 鏂规硶鍚庣疆鍔ㄤ綔
 	 * @param proxy
 	 * @param method
 	 * @throws Exception
 	 */
 	public void afterInvoke(Object proxy,Method method) throws Exception;
 	/**
-	 * 方法前置动作
+	 * 鏂规硶鍓嶇疆鍔ㄤ綔
 	 * @param proxy
 	 * @param method
 	 * @throws Exception
@@ -19,7 +19,7 @@ public interface IInterceptor {
 	public void beforeInvoke(Object proxy,Method method) throws Exception;
 
 	/**
-	 * 异常处理
+	 * 寮傚父澶勭悊
 	 * @param proxy
 	 * @param method
 	 * @throws Exception
