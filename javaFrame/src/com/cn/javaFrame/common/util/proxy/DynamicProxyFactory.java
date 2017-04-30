@@ -26,7 +26,7 @@ public class DynamicProxyFactory {
 		 * @param clazz
 		 * @return
 		 */
-		public static Set<Class<?>> getAllInterfacesForClassAsSet(Class<?> clazz){
+		private static Set<Class<?>> getAllInterfacesForClassAsSet(Class<?> clazz){
 			Set<Class<?>> interfaces=new LinkedHashSet<Class<?>>();
 			while(clazz!=null){
 				Class<?>[] ifcs=clazz.getInterfaces();

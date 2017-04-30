@@ -19,7 +19,7 @@ public class DynamicProxy implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		List<IInterceptor> filterInterceptors = interceptors;
-		if (filterInterceptors != null && !filterInterceptors.isEmpty()) {
+		if (filterInterceptors == null && filterInterceptors.isEmpty()) {
 			return method.invoke(obj, args);
 		}
 		// 方法前置动作：拦截器
