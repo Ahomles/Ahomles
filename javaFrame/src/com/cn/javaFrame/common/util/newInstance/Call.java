@@ -1,5 +1,6 @@
 package com.cn.javaFrame.common.util.newInstance;
 
-public interface Service {
-	public void server();
+
+public interface Call<T> {
+	public void call(T t);
 }
