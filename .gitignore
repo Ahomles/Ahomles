@@ -48,3 +48,8 @@ Temporary Items
 
 *.class
 *.apk
+bin/
+gen/
+.settings/
+proguard/
+
