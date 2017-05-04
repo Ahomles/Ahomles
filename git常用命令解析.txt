@@ -1,0 +1,5 @@
+>>命令,隐藏推送代码，拉取，显示推送代码
+git stash 
+git pull
+git stash pop
+>>
