@@ -2,4 +2,8 @@
 git stash 
 git pull
 git stash pop
+>>命令,文件的差别
+git diff <file>
+git diff  command.txt
 >>
+git diff <branch1>..<branch2> 
