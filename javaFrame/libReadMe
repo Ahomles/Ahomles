@@ -1,0 +1,3 @@
+fastjson-1.2.3.jar: --出自阿里巴巴
+aicommon-csf-1.0-SNAPSHOT.jar --亚信为CSF和ESB写的工具类
+commons-logging-1.0.jar  --日志系统

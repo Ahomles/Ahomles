@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoveBo {
+public class MoveBo1 {
 	public static final String[] boDir = { "bo", "dao",
 			"dao" + File.separator + "interfaces",
 			"dao" + File.separator + "impl", "ivalues", "service",
@@ -14,8 +14,8 @@ public class MoveBo {
 	public static void main(String[] args) {
 	
 		String srcPath="D:\\develop\\aGit\\project\\project01\\javaFrame\\src\\com\\cn\\javaFrame\\common\\test\\dirPath";
-		String destPath="D:\\project\\gzzxProject\\devProject\\rule_center\\src\\main\\java\\com\\asiainfo\\crm\\uip\\common";
-		String value="IBOBsCmBusiTypeRuleDtlValue";
+		String destPath="D:\\develop\\aGit\\project\\project01\\javaFrame\\src\\com\\cn\\javaFrame\\common\\test\\dirPath";
+		String value="IBOPartyOrganizeValue";
 		/**
 		 * srcPath==》
 		   D:\develop\aGit\project\project01\javaFrame\src\com\cn\javaFrame\common\test\srcPath
@@ -24,23 +24,10 @@ public class MoveBo {
 		   IBOQryMDBProxyLogValue
 		 */
 //		getBoPath(destPath,fistLine(destPath));
-		moveBoDirFile(srcPath,destPath,value);
-//		FileUtil.deleteDir(destPath);
+//		moveBoDirFile(srcPath,destPath,value);
+		FileUtil.deleteDir(destPath);
 	}
-	public static String choosePath(String path,String fileName){
-		String beanPath="";
-		String enginePath="";
-		
-		String rtnPath="";
-		if(fileName.contains("Bean.java")){
-			rtnPath=beanPath+File.separator+fileName;
-		}else if(fileName.contains("Engine.java")){
-			rtnPath=enginePath+File.separator+fileName;
-		}
-		
-		return "";
-	}
-	
+
 	public static String projectPah() {
 		String path = System.getProperty("user.dir") + File.separator + "src"
 				+ File.separator + "com" + File.separator + "cn"
@@ -66,8 +53,7 @@ public class MoveBo {
 			if(temPath.size()>0&&temPath!=null){
 				for(int j=0;j<temPath.size();j++){
 					srcPath = srcDirPath + File.separator + temPath.get(j);
-					destPath = choosePath(destPath,temPath.get(j));
-					
+					destPath = destDirPath + File.separator + temPath.get(j);
 					System.out.println(srcPath+"\n"+"===>"+"\n"+destPath);
 //					FileUtil.moveCopyFile(srcPath, destPath);
 					String firstLine = fistLine(destPath);
@@ -118,5 +104,26 @@ public class MoveBo {
 			FileUtil.createDir(dirPath);
 		}
 		return true;
+	}
+	private static String getBoPath(String srcPath,String firstLine){
+		String boTemp=srcPath.substring(0,srcPath.lastIndexOf("."));
+		boTemp=boTemp.substring(srcPath.lastIndexOf("\\"));
+		boTemp=boTemp.substring(1,boTemp.indexOf("Bean"));
+		String boPath=firstLine.substring(8,firstLine.length()-1)+"."+boTemp;
+		boPath="\t"+  "private static String  m_boName = \""+boPath+"\""+";";
+		System.out.println(boPath);
+		return boPath;
+	}
+	private static String getBoName(String srcPath,String firstLine){
+		String boTemp=srcPath.substring(0,srcPath.lastIndexOf("."));
+		boTemp=boTemp.substring(srcPath.lastIndexOf("\\"));
+		boTemp=boTemp.substring(1,boTemp.indexOf("Bean"));
+		return boTemp;
+	}
+	
+	
+	public static String replaceString(String path,String fromStr,String toStr){
+		
+		return null;
 	}
 }
