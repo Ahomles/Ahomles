@@ -1,0 +1,14 @@
+BeanUtils
+XStream
+Digester
+
+1.XML和对象的相互转化 --需要添加注解，转化器的理解
+2.对象和对象的相互赋值
+3.Map转化为对象
+4.JSON和对象的相互转化
+
+
+
+1.XML和Map的相互转化
+2.JSON和Map的相互转化
+
