@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 qewr
 asdfa
 werqwe
 asdfa
+=======
+fasdfasdfasdfawerqwet
+afsdfa
+asfdsadf
+asfdasdf
+afda
+>>>>>>> origin/dev
