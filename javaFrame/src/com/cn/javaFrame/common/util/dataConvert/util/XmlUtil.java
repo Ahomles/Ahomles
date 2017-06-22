@@ -1,8 +1,12 @@
 package com.cn.javaFrame.common.util.dataConvert.util;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import com.ai.common.esb.Constant;
@@ -10,7 +14,14 @@ import com.ai.common.esb.util.ParamKeyCache;
 
 public class XmlUtil {
 
-	
+	/**
+	 * 增强般的xml解析
+	 * @param root
+	 * @param parentKey
+	 * @param cfgMap
+	 * @param serParam
+	 * @return
+	 */
 	private static Map getBusiParamMap(Element root, String parentKey, Map cfgMap, Map serParam)
     {
         for(Iterator iterEle = root.elementIterator(); iterEle.hasNext();)
@@ -88,4 +99,39 @@ public class XmlUtil {
         return sb.toString();
     }
 
+	
+	
+	/**
+	 * xml转化为Map,无法解析list的形式
+	 * @param xmlStr
+	 * @return
+	 * @throws Exception
+	 */
+	public static Map fromXml2Map(String xmlStr) throws Exception{
+		if(null==xmlStr||"".equals(xmlStr)){
+			return null;
+		}
+		Document document=DocumentHelper.parseText(xmlStr);
+		Element rootElement=document.getRootElement();
+		if(null==rootElement){
+			throw new Exception("根元素为null！");
+		}
+		Map retMap=new HashMap();
+		retMap.put(rootElement.getName(),handleElement(rootElement));
+		return retMap;
+	}
+	
+	
+	public static Map handleElement(Element element){
+		Map retMap=new HashMap();
+		for(Iterator iterator = element.elementIterator();iterator.hasNext();){
+			element=(Element)iterator.next();
+			if(element.isTextOnly()){
+				retMap.put(element.getName(), element.getText());
+			}else{
+				retMap.put(element.getName(), handleElement(element));
+			}
+		}
+		return retMap;
+	}
 }

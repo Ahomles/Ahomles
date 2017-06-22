@@ -20,6 +20,9 @@ import com.cn.javaFrame.common.util.dataConvert.test.bean.Personal;
 public class TestBeanUtils {
 	public static void main(String[] args) {
 		/**
+		 * 对象转化未对象，Map转化为对象
+		 * commons-beanutils-1.0.jar 
+		 * commons-collections-3.0.jar 
 		 * 三种使用方式：
 		 * 用法1： 对象属性的拷贝
 		 * BeanUtils.copyProperty(admin, "userName", "jack");

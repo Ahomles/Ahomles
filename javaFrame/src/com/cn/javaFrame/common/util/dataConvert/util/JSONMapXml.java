@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 public class JSONMapXml {
 	/**
 	 * 简单的Map2Bean,1.没有考虑Map中的value都是字符串2.没有考虑对像属性
+	 * 具体参考BeanUtils工具类,不够成熟
 	 * @param map
 	 * @param beanClass
 	 * @return
@@ -44,7 +45,7 @@ public class JSONMapXml {
 	}
 	/**
 	 * 简单的Bean2Map,1.没有考虑Map中的value都是字符串2.没有考虑对像属性
-	 * @param obj
+	 * @param obj，不够成熟
 	 * @return
 	 * @throws Exception
 	 */
@@ -63,6 +64,11 @@ public class JSONMapXml {
         return map;  
 	}
 	
+	/**
+	 * 由xml转化为Map（text,Map,list）
+	 * @param xmlStr,xml和对象的转换参考（XStream)
+	 * @return
+	 */
 	public static Map fromXML2Map(String xmlStr){
 		try {
 			Document document=DocumentHelper.parseText(xmlStr);
@@ -80,8 +86,6 @@ public class JSONMapXml {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return null;
 	}
 	
