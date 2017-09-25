@@ -1,0 +1,782 @@
+package com.asiainfo.res.center.action.service.interfaces;
+
+import java.rmi.RemoteException;
+
+import com.ai.appframe2.bo.DataContainer;
+import com.ai.appframe2.common.DataContainerInterface;
+import com.asiainfo.boss.common.ivalues.ICfgStaticDataValue;
+import com.asiainfo.boss.res.exe.ivalues.IBOCaCustomerActivateValue;
+import com.asiainfo.boss.res.exe.ivalues.IBOEaExchangeForSoValue;
+import com.asiainfo.boss.res.exe.ivalues.IBORaReturnActivityValue;
+import com.asiainfo.boss.res.inter.ivalues.IBOResOrgMapValue;
+import com.asiainfo.boss.res.newvaluecard.ivalues.IBOResValueCardInHisValue;
+import com.asiainfo.boss.res.newvaluecard.ivalues.IBOResValueCardInValue;
+import com.asiainfo.boss.res.newvaluecard.ivalues.IBOResValueCardSellValue;
+import com.asiainfo.boss.res.newvaluecard.ivalues.IBOResValueCardSpecValue;
+import com.asiainfo.boss.res.newvaluecard.ivalues.IBOResValueCardValue;
+import com.asiainfo.boss.res.phone.bo.BOResFreeNumRightBean;
+import com.asiainfo.boss.res.phone.ivalues.IBOPhoneNumValue;
+import com.asiainfo.boss.res.phone.ivalues.IBORESFreedomNumPoolValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResFreeChooseOrgValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResFreeChooseRightValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResFreedomNumLimitValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResNumBatValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResNumBindSpflowValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResNumBindValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOResSelNumCustLogValue;
+import com.asiainfo.boss.res.phone.ivalues.IBOSResPhoneFreeValue;
+import com.asiainfo.boss.res.query.ivalues.IBOResBusiCardLockDealLogValue;
+import com.asiainfo.boss.res.query.ivalues.IBOResOrgRelValue;
+import com.asiainfo.boss.res.rescfg.ivalues.IBOResHlrMgntValue;
+import com.asiainfo.boss.res.rescfg.ivalues.IBOResNumberPatternValue;
+import com.asiainfo.boss.res.resmarketmgr.ivalues.IBOResWorkflowModelValue;
+import com.asiainfo.boss.res.sim.ivalues.IBOResChoosePoolOrgValue;
+import com.asiainfo.boss.res.sim.ivalues.IBOResIoRecValue;
+import com.asiainfo.boss.res.sim.ivalues.IBOResStockRecSimValue;
+import com.asiainfo.boss.res.sim.ivalues.IQBOStatisticalValue;
+import com.asiainfo.boss.so.exe.ivalues.IBOResInvoiceNumInfoValue;
+import com.asiainfo.boss.so.soframe.ivalues.ISoBatMemberFieldCfgValue;
+import com.asiainfo.boss.so.soframe.ivalues.ISoParamDtlValue;
+import com.asiainfo.boss.so.soframe.ivalues.ISoProductMemberInputConfigValue;
+
+public12 interface IResServiceCSV {
+	/**
+	  * 
+	  * IPhoneStatisticSelSV.selPhoneStatistic
+	  * @Function:com.asiainfo.res.center.action.service.interfaces.IResActionCSV.selPhoneStatistic
+	  * @Description: 根据条件统计号码
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-7 下午3:37:08
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-7        zhunb3            v1.1.0               修改原因
+	 */
+	public selPhoneStatistic(String regionId,String orgId,String tradeId,String manageStatus,String phoneHead,String tableFlag,int start,int end)throws Exception,RemoteException;
+	/**
+	  * 
+	  * IPhoneStatisticSelSV.selPhoneStatisticCount
+	  * @Function:com.asiainfo.res.center.action.service.interfaces.IResActionCSV.selPhoneStatisticCount
+	  * @Description: 根据条件(查询统计号码数量)
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-7 下午3:37:08
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-7        zhunb3            v1.1.0               修改原因
+	 */
+	public selPhoneStatisticCount(String regionId,String orgId,String tradeId,String manageStatus,String phoneHead,String tableFlag)throws Exception,RemoteException;
+	
+	/**
+	 * 
+	  * IResBaseTypeSV.getBaseTypeList
+	  * @Function:com.asiainfo.res.center.action.service.interfacesIResServiceCSV.javarescenter
+	  * @Description: 该函数的功能描述:保存订单（包括订单行，订单项及特征，关系）
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-11 下午3:24:39
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-11        zhunb3            v1.1.0               修改原因
+	 */
+	public getBaseTypeList(long codeType)throws Exception,RemoteException;
+
+
+	/**
+	 * IConfigResQuerySV.selResNumberPatter
+	  * @Function:com.asiainfo.res.center.action.service.interfacesIResServiceCSV.javarescenter
+	  * @Description: 该函数的功能描述:保存订单（包括订单行，订单项及特征，关系）
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-11 下午3:54:08
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-11        zhunb3            v1.1.0               修改原因
+	 */
+	public selResNumberPatter(String condition, int start, int end)throws Exception,RemoteException ;
+	
+	/**
+	 * IConfigResQuerySV.getResNumberPatterCounts
+	  * @Function:com.asiainfo.res.center.action.service.interfacesIResServiceCSV.javarescenter
+	  * @Description: 该函数的功能描述:保存订单（包括订单行，订单项及特征，关系）
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-11 下午3:54:08
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-11        zhunb3            v1.1.0               修改原因
+	 */
+	public getResNumberPatterCounts(String condition)throws Exception,RemoteException ;
+	
+	/**
+	 * 自由选号区号码查询
+	 * @param freeOrgId 自由选号区id
+	 * @param resCode 资源型号
+	 * @param regionCode 地区
+	 * @param chooseLevel 号码类型
+	 * @param begId 起始号
+	 * @param endId 截至号
+	 * @param isblur 是否模糊
+	 * @param doneCode 工单号
+	 * @param manageStatus 管理状态
+	 * @param tradeId 品牌
+	 * @param nums 数量
+	 * @param selectPriceMode 号码模式
+	 * @param useType 使用类型
+	 * @param reserveFee 选号费
+	 * @param aStartNum
+	 * @param aEndNum
+	 * @return
+	 * @throws RemoteException
+	 * @throws Exception
+	 */
+	public queryPhoneFreeInfo(String freeOrgId,String resCode,String regionCode,
+			String chooseLevel, String begId, String endId,String isblur, 
+			String doneCode, String manageStatus, String tradeId,String nums,
+			String selectPriceMode, String useType,String reserveFee,String ownType,String isPutIn,int aStartNum,int aEndNum)throws RemoteException, Exception;
+	
+	public getcounts_free(String freeOrgId,String resCode,String regionCode,
+			String chooseLevel, String begId, String endId,String isblur, 
+			String doneCode, String manageStatus, String tradeId,String nums,
+			String selectPriceMode, String useType,String reserveFee,String ownType,String isPutIn)throws RemoteException, Exception;
+
+	public queryResNumBat(String doneCode,String state, int startIndex,int endIndex) throws Exception, RemoteException;
+
+	public getResNumBatCount(String doneCode,String state)throws Exception, RemoteException;
+
+
+	
+	public getqryValCardFbCount(String donetype,String date,String grpno,String regionId,String orgId) throws Exception,RemoteException ;
+
+	/**
+	 * 入库反馈查询
+	 * @return
+	 * @throws Exception
+	 */
+	public qryValCardFb(String donetype,String date,String grpno,String regionId,String orgId,int startRow,int endRow) throws Exception,RemoteException;
+	
+	/**
+	 * 获取未处理的工单总数
+	 * @param donetype
+	 * @param date
+	 * @param grpno
+	 * @param regionId
+	 * @param orgId
+	 * @return
+	 * @throws Exception
+	 */
+	public getResValueCardInCount(String donetype, String date,
+			String grpno, String regionId, String orgId) throws Exception,RemoteException ;
+	
+	/**
+	 * 获取未处理的工单列表
+	 * @param donetype
+	 * @param date
+	 * @param grpno
+	 * @param regionId
+	 * @param orgId
+	 * @return
+	 * @throws Exception
+	 */
+	public getResValueCardInList(String donetype,
+			String date, String grpno, String regionId, String orgId,int start,int end)
+			throws Exception,RemoteException;
+	
+	/**
+	 * 查询自由选号区权限信息
+	 * @param FREE_ORG_ID
+	 * @param USE_ORG_ID
+	 * @param KERNEL_ORG
+	 * @param STATUS
+	 * @param start
+	 * @param end
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public selResFreeChooseRight(String FREE_ORG_ID,String USE_ORG_ID,String KERNEL_ORG,String STATUS, int start, int end)throws Exception,RemoteException;
+	
+	/**
+	 * 查询自由选号区权限数量
+	 * @param FREE_ORG_ID
+	 * @param USE_ORG_ID
+	 * @param KERNEL_ORG
+	 * @param STATUS
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getResFreeChooseRightCounts(String FREE_ORG_ID,String USE_ORG_ID,String KERNEL_ORG,String STATUS) throws Exception,RemoteException;
+	
+	/**
+	 * 自由选号区信息查询
+	 * @param strOrgId
+	 * @param strOrgName
+	 * @param strStatus
+	 * @param StrOrg
+	 * @param strRegionId
+	 * @param aStartNum
+	 * @param aEndNum
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryFreeChooseOrg(String strOrgId,
+			String strOrgName, String strStatus, String StrOrg,
+			String strRegionId,String level, int aStartNum, int aEndNum) throws Exception,
+			RemoteException;
+	
+	/**
+	 * 自由选号区查询结果数
+	 * 
+	 * @param strOrgId
+	 * @param strOrgName
+	 * @param strStatus
+	 * @param StrOrg
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getCounts(String strOrgId, String strOrgName, String strStatus,
+			String StrOrg, String strRegionId,String level) throws Exception,
+			RemoteException;
+	
+	public findBOResChoosePoolOrgValue(String orgId,String orgLevel, int start, int end)throws Exception, RemoteException ;
+
+	/**
+	 * SIM卡统计查询[包含已用和未用SIM卡] 
+	 * @param regionId			地市
+	 * @param orgId				SIM卡源组织
+	 * @param resCode			SIM卡资源类型
+	 * @param manageStatus		SIM卡状态
+	 * @param simHead			SIM卡号头
+	 * @param resCode			SIM卡子类型
+	 * @return					
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public simCardStatistic(String regionId,
+			String orgId, String resCode, String manageStatus, String simHead,String resTypeId)
+			throws Exception, RemoteException;
+
+	public getNumRight(String FREE_ORG_ID,
+			String USE_ORG_ID,String FREEDOM_ORG_ID, int start, int end)throws Exception,RemoteException;
+	
+	public getCounts(String FREE_ORG_ID, String USE_ORG_ID,String FREEDOM_ORG_ID)
+			throws Exception,RemoteException;
+
+	public getResOrgMapByRealOrgId(String realRegionId)throws  RemoteException,Exception;
+
+	public getHlrByRegionIdValid(String regionId)throws Exception,RemoteException;
+	
+	public queryFreeChooseOrg(String strOrgId,
+			String strOrgName, String strStatus, String StrOrg,
+			String strRegionId, int aStartNum, int aEndNum) throws Exception,
+			RemoteException;
+	
+	public getCounts(String strOrgId, String strOrgName, String strStatus,
+			String StrOrg, String strRegionId) throws Exception,
+			RemoteException;
+	
+	public selResFreeChooseRight_new(String FREE_ORG_ID,String USE_ORG_ID,String KERNEL_ORG,String STATUS,String OrgName, int start, int end)throws Exception,RemoteException;
+
+
+	public selResNumBatSuccByOriginPhone(String regionId,String donecode,String donedate,int start, int end )throws Exception,RemoteException;
+
+	public getResNumBatSuccByOriginPhoneCounts(String regionId,String donecode,String donedate)throws Exception,RemoteException;
+
+	public selResNumBatLostByOriginPhone(String regionId,String donecode,String donedate,int start, int end )throws Exception,RemoteException;
+
+	public getResNumBatLostByOriginPhoneCounts(String regionId,String donecode,String donedate)throws Exception,RemoteException;
+
+	public selFromPhoneUsedSegment(String startNum,String endNum,String regionId,String orgId,
+			String manageStatus,String backrsn,String date1,String date2,String flag,int start,int end)	throws Exception;
+
+	public selFromPhoneUsedSegmentCounts(String startNum,String endNum,String regionId,String orgId,String manageStatus,
+			String backrsn,String date1,String date2,String flag) throws Exception;
+	
+	
+
+	public queryResValueCard( String cardNo,
+			String startCardNo,String endCardNo,String cardStatus,String orgId,String price,String bfhandUseSfate,String isResCode2,int startRow,int endRow) throws Exception;
+	
+	public queryCount(String cardNo,
+			String startCardNo,String endCardNo,String cardStatus,String orgId, String price,String bfhandUseSfate,String isResCode2) throws Exception;
+	
+	
+	/**
+	 * 
+	  * IResBaseTypeSV.getResModelList
+	  * @Description: 该函数的功能描述:根据资源子类别ID获取级联的资源型号列表
+	  * @param map
+	  * @return map
+	  * @throws Exception
+	  * @version: v1.1.0
+	  * @author: zhunb3
+	  * @date: 2017-9-11 下午3:24:39
+	  * Modification History:
+	  *   Date         Author          Version            Description
+	  *-------------------------------------------------------------
+	  * 2017-9-11        zhunb3            v1.1.0               修改原因
+	 */
+	public getResModelList(String resTypeId)throws Exception, RemoteException;
+	
+	/**
+	 * IResBaseTypeSV.getResTypeList
+	 * 查询资源子类数据表中的数据,用于ds调用
+	 * @param resType
+	 * @return
+	 */
+	public getResTypeList(String resType)throws Exception, RemoteException;
+	
+	/**
+	 * 
+	 * @param regionId
+	 * @param orgId
+	 * @param resCode
+	 * @param strBeginCode
+	 * @param strEndCode
+	 * @param manageStatus
+	 * @param useType
+	 * @param grpno
+	 * @param imsi
+	 * @param purpose
+	 * @param isConfirm
+	 * @param isRecursion
+	 * @param usedFlag
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryResSimCard(String regionId,String orgId, String resCode, String strBeginCode,
+		String strEndCode, String manageStatus, String useType,String grpno, String imsi, String purpose, String isConfirm,String isRecursion,
+		int usedFlag,int startIndex, int endIndex)throws Exception, RemoteException;
+	
+	/**
+	 * 
+	 * @param regionId
+	 * @param orgId
+	 * @param resCode
+	 * @param strBeginCode
+	 * @param strEndCode
+	 * @param manageStatus
+	 * @param useType
+	 * @param grpno
+	 * @param imsi
+	 * @param purpose
+	 * @param isConfirm
+	 * @param isRecursion
+	 * @param usedFlag
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getResSimCardCount(String regionId, String orgId, String resCode, String strBeginCode, String strEndCode,
+		String manageStatus, String useType, String grpno, String imsi, String purpose, String isConfirm,String isRecursion,int usedFlag)
+		throws Exception, RemoteException;
+	
+	/**
+	 * 根据业务流水查询SIM卡出入库明细			
+	 * @param doneCode
+	 * @param regionId
+	 * @param startNum
+	 * @param endNum
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryResStockResSim(String iccId,String doneCode,String regionId) throws Exception, RemoteException;	
+	
+    /**
+     * 查询组织包含下级组织
+     * @param parentid
+     * @param type
+     * @param name
+     * @param $STARTROWINDEX
+     * @param $ENDROWINDEX
+     * @return
+     * @throws Exception
+     * @throws RemoteException
+     */
+    public queryOrganizeResult(String parentid,String code,String type,String level,String name,String isFirstLevel,String orgId,int STARTROWINDEX,int ENDROWINDEX)throws Exception , RemoteException;
+
+    /**
+     * 获取总记录数
+     * @param parentid
+     * @param type
+     * @param name
+     * @return
+     * @throws Exception
+     * @throws RemoteException
+     */
+    public countOrganizeResult(String parentid,String code,String type,String level,String name,String isFirstLevel,String orgId)throws Exception , RemoteException;
+    
+    /**
+     * 获取组织的层次
+     * @param orgId
+     * @return
+     * @throws Exception
+     */
+    public getOrgLevel(long orgId) throws Exception;    
+    
+	/**
+	 * 获取静态参数配置
+	 * @param codeType
+	 * @throws Exception
+	 * @throws RemoteException
+	 * @return ICfgStaticDataValue[]
+	 */
+	public getStaticData(String codeType) throws Exception, RemoteException; 	
+	
+	public queryResValueCardSpec(String resCode2,String status)throws Exception, RemoteException; 	
+	public querySpecCount(String resCode2,String status)throws Exception, RemoteException; 	
+	
+	/**
+	 * 查询SIM卡出入库记录 
+	 * @param regionId			地市代码
+	 * @param optCode			出入库操作类型
+	 * @param resCode			资源类型
+	 * @param beginNo			起始号码
+	 * @param endNo				终止号码
+	 * @param doneCode			流水号
+	 * @param beginDate			操作开始日期
+	 * @param endDate			操作结束日期
+	 * @param orgId				组织单元
+	 * @param startNum			开始下标
+	 * @param endNum			结束下标
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryResIoRec(String regionId, String optCode,
+			String resCode, String beginNo, String endNo, String doneCode,
+			String beginDate, String endDate, String orgId, int startNum,
+			int endNum) throws Exception, RemoteException;
+	
+	/**
+	 * 查询SIM卡出入库记录条数 
+	 * @param regionId			地市代码
+	 * @param optCode			出入库操作类型
+	 * @param resCode			资源类型
+	 * @param beginNo			起始号码
+	 * @param endNo				终止号码
+	 * @param doneCode			流水号
+	 * @param beginDate			操作开始日期
+	 * @param endDate			操作结束日期
+	 * @param orgId				组织单元
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getResIoRecCount(String regionId, String optCode,
+			String resCode, String beginNo, String endNo, String doneCode,
+			String beginDate, String endDate, String orgId) throws Exception,
+			RemoteException;
+	
+	/**
+	 * @author songyh
+	 * 查询申领池分配配置
+	 * @param useOrgId
+	 * @param regionId
+	 * @param startNum
+	 * @param endNum
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getFreedomNumLimitValues(String useOrgId, int startNum,int endNum) throws Exception,RemoteException;
+	
+	/**
+	 * @author songyh
+	 * 查询申领池分配配置数量
+	 * @param useOrgId
+	 * @param regionId
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getFreedomNumLimitCount(String useOrgId) throws Exception,RemoteException;
+	
+	/**
+	 * @author songyh
+	 * 查询申领池分配配置
+	 * @param ruleId
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getFreedomNumLimitValue(long ruleId) throws Exception,RemoteException;
+	
+	  /**
+	   * 查询资源调配关系信息
+	   * @param srcOrgId
+	   * @param destOrgId
+	   * @param destOrgName
+	   * @return
+	   * @throws Exception
+	   * @throws RemoteException
+	   */
+	  public queryResOrgRelValue(String regionId,String resCode,String resTypeId,String srcOrgId,String destOrgId,String destOrgName,int startIndex,int endIndex)throws Exception,RemoteException;
+
+	  public queryResOrgRelValueCounts(String regionId,String resCode,String resTypeId,String srcOrgId,String destOrgId,String destOrgType,String optType,String state)throws Exception,RemoteException;
+	
+	  /**
+		 * 查询未销售的有价卡明细
+		 * @param regionId
+		 * @param orgId
+		 * @param resCode
+		 * @param cardStatus
+		 * @param cardWayStatus
+		 * @param beginCardNo
+		 * @param endCardNo
+		 * @param startRowIndex
+		 * @param endRowIndex
+		 * @return
+		 * @throws Exception
+		 * @throws RemoteException
+		 */
+		public getResValueCardValues(String regionId,long orgId,String resCode,
+				String cardWayStatus,String beginCardNo,String endCardNo,int startRowIndex,int endRowIndex) throws Exception,RemoteException;
+
+		public getResValueCardCount(String regionId,long orgId,String resCode,
+				String cardWayStatus,String beginCardNo,String endCardNo) throws Exception,RemoteException;
+		
+		public queryBusiCardLockDealLog (String cardNumber, String optId, String beginDate, String endDate, int start, int end) throws Exception,
+		RemoteException;
+
+		public getCount (String cardNumber, String optId, String beginDate, String endDate) throws Exception,RemoteException;
+
+    public getSoParamDtlValues(String s)throws Exception, RemoteException;
+
+    public fetchOpenLeaveorder(String s, String s1) throws Exception, RemoteException;
+    
+    public queryResValCardStatusForSYJ(String s, String s1, String s2) throws Exception, RemoteException;
+
+    public getSoProMemInputConValue(long l)
+            throws Exception, RemoteException;
+    
+    public getSoBatMemberFieldCfg(long l)
+            throws Exception, RemoteException;
+	
+	public queryResValueCardCount(String cardNo, String startCardNo,String endCardNo,String cardStatus,
+			String orgId, String price,String bfhandUseSfate,String isResCode2) throws Exception;
+	
+	public queryCardSell1(String cardNo,String orgId,String cardStatus)throws Exception;
+
+	public queryCardSellCount(String cardNo,String orgId,String cardStatus)throws Exception;
+
+	/**
+	 * 根据手机号、imei信息查询全网操盘激活信息记录数
+	 * 
+	 * @param billId
+	 * @param imei
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryCountCa(String billId, String imei) throws Exception, RemoteException;
+
+	/**
+	 * 根据手机号、imei信息查询全网操盘激活信息明细
+	 * 
+	 * @param billId
+	 * @param imei
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryCa(String billId, String imei, int startIndex, int endIndex) 
+			throws Exception, RemoteException;	
+	
+	/**
+	 * 根据手机号查询三码合一用户换货数据记录数
+	 * 
+	 * @param billId
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryCountEa(String billId) throws Exception, RemoteException;
+
+	/**
+	 * 根据手机号查询三码合一用户换货数据明细
+	 * 
+	 * @param billId
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryEa(String billId, int startIndex,
+			int endIndex) throws Exception, RemoteException;
+	
+	/**
+	 * 根据手机号查询三码合一用户退货数据记录数
+	 * @param billId
+	 * @param imei
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryCountRa(String billId, String imei) throws Exception,
+			RemoteException;
+
+	/**
+	 * 根据手机号查询三码合一用户退货数据明细
+	 * @param billId
+	 * @param imei
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public queryRa(String billId, String imei,
+			int startIndex, int endIndex) throws Exception, RemoteException;	
+	
+	/**
+	 * 得到号码配置信息
+	 * @param regionId  地区ID
+	 * @return 
+	 * @throws Exception
+	 * @throws RemoteException
+	 */
+	public getResNumberPattern(String regionId)throws Exception,RemoteException;	
+	
+	/**
+	 * 查询符合条件的号码,供号码BINDING使用
+	 * @param startNum   开始号码
+	 * @param endNum    结束号码
+	 * @param orgIdOrFreeChooseId  组织ID或者自由选号区ID
+	 * @param selectPriceMode  选号费模式,即号码模式
+	 * @param reserveFee  选号费
+	 * @param regionId   地区
+	 * @return  IBOPhoneNumValue[]
+	 * @throws RemoteException
+	 */
+	public selPhoneForBinding(String startNum, String endNum, String orgIdOrFreeChooseId, String selectPriceMode,String reserveFee, String regionId, int start,int end)throws Exception,RemoteException;
+	/**
+	 * 查询符合条件的号码数量,供号码BINDING使用
+	 * @param startNum   开始号码
+	 * @param endNum    结束号码
+	 * @param orgIdOrFreeChooseId  组织ID或者自由选号区ID
+	 * @param selectPriceMode  选号费模式,即号码模式
+	 * @param reserveFee  选号费
+	 * @param regionId   地区
+	 * @return  IBOPhoneNumValue[]
+	 * @throws RemoteException
+	 */
+	public selPhoneForBindingCounts(String startNum, String endNum, String orgIdOrFreeChooseId, String selectPriceMode,String reserveFee, String regionId)throws Exception,RemoteException;
+
+	/**
+	 * 根据条件查询号码的捆绑信息
+	 * @param BILL_ID   服务号码
+	 * @param REGION_ID 地市
+	 * @param GROUP_ID  分组号
+	 * @param PRODUCT_ID  产品ID
+	 * @param OFFER_ID  产品策划
+	 * @param BRAND_ID  品牌
+	 * @param PRODUCT_NAME 产品大类名称
+	 * @param OFFER_NAME 产品策划名称
+	 * @param BRAND_NAME  品牌名称
+	 * @param FEE  最低预存金额
+	 * @param STATE 状态
+	 * @param flagStr   过滤条件如:1=1
+	 * @param start
+	 * @param end
+	 * @return
+	 * @throws Exception
+	 */
+	public selResNumBind(
+			String BILL_ID_START,String BILL_ID_END,String LEVEL_ID,String PATTERN_ID,String REGION_ID,String ORG_ID,String GROUP_ID,String PRODUCT_ID,
+			String OFFER_ID,String BRAND_ID,String PRODUCT_NAME,String OFFER_NAME,String BRAND_NAME,
+			String FEE,String STATE,String flagStr,int start, int end)throws Exception,RemoteException ;
+	/**
+	 * 根据条件查询号码的捆绑信息数量
+	 * @param BILL_ID   服务号码
+	 * @param REGION_ID 地市
+	 * @param GROUP_ID  分组号
+	 * @param PRODUCT_ID  产品ID
+	 * @param OFFER_ID  产品策划
+	 * @param BRAND_ID  品牌
+	 * @param PRODUCT_NAME 产品大类名称
+	 * @param OFFER_NAME   产品策划名称
+	 * @param BRAND_NAME   品牌名称
+	 * @param FEE   最低预存金额
+	 * @param STATE 状态
+	 * @param flagStr   过滤条件如:1=1
+	 * @return
+	 * @throws Exception
+	 */
+	public getResNumBindCounts(
+			String BILL_ID_START,String BILL_ID_END,String LEVEL_ID,String PATTERN_ID,String REGION_ID,String ORG_ID,String GROUP_ID,String PRODUCT_ID,String OFFER_ID,String BRAND_ID,
+			String PRODUCT_NAME,String OFFER_NAME,String BRAND_NAME,String FEE,String STATE,String flagStr) throws Exception,RemoteException;	
+	
+
+	public queryResNumBindSpflow(String billId,String patternId,String levelId,String regionId,int startIndex,int endIndex) throws Exception, RemoteException;
+
+	public getResNumBindSpflowCount(String billId,String patternId,String levelId,String regionId) throws Exception, RemoteException;
+	
+	public queryResPhoneNum (String regionCode, String orgId, String isRecursion, String manageStatus, String resCode, String chooseLevel, String selectPricemode,
+			String billId, String isblur, String begId, String endId, String iccId, String isConfirm, String numPreDate, int aStartNum, int aEndNum) throws Exception,RemoteException;
+
+	public getResPhoneNumCount (String regionCode, String orgId, String isRecursion, String manageStatus, String resCode, String chooseLevel, String selectPricemode,
+		String billId, String isblur, String begId, String endId, String iccId, String isConfirm, String numPreDate) throws Exception,RemoteException;
+		
+    public queryResWorkFlowModel(String regionId,String codeType,String mdlId,String mdlName,String flag,int startIndex, int endIndex)throws Exception, RemoteException;
+
+    public getResWorkFlowModelCount(String regionId,String codeType,String mdlId,String mdlName,String flag)throws Exception, RemoteException;
+    
+    
+    public getInvoiceNumInfoValues(String s, String s1, String s2, String s3, String s4, String s5, String s6, 
+            String s7, String s8, String s9, String s10, String s11, String s12, String s13, 
+            String s14, String s15, int i, int j) throws Exception, RemoteException;
+
+    public getInvoiceNumInfoCount(String s, String s1, String s2, String s3, String s4, String s5, String s6, 
+            String s7, String s8, String s9, String s10, String s11, String s12, String s13, 
+            String s14, String s15)throws Exception, RemoteException;
+
+	public getResValueCardSellValues(String regionId,long orgId,String resCode,
+			String beginCardNo,String endCardNo,int startRowIndex,int endRowIndex) throws Exception,RemoteException;
+
+	public getResValueCardSellCount(String regionId,long orgId,String resCode,
+			String beginCardNo,String endCardNo) throws Exception,RemoteException;
+
+	public selFromPhoneSegmentDSJFCO(String startNum, String endNum, String managerStatus, String tradeId, String regionId, int start, int end) throws Exception,RemoteException;
+
+	public selFromPhoneSegmentDSJFCOCount(String startNum, String endNum, String managerStatus, String tradeId, String regionId) throws Exception, RemoteException;
+
+	public selResSelNumCustLog(String strRegionId,
+			String strBillId, String strOrgId, String optType,
+			String strCardType, String strCardNo, String KHBJ,
+			String startTime, String endTime, String flag, int aStartNum,
+			int aEndNum) throws Exception, RemoteException;
+	
+	public selResSelNumCustLogCount(String strRegionId, String strBillId,
+			String strOrgId, String optType, String strCardType,
+			String strCardNo, String KHBJ, String startTime, String endTime,
+			String flag) throws Exception, RemoteException;
+}

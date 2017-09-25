@@ -1,4 +1,4 @@
-package com.cn.javaFrame.common.util.file;
+package com.cn.javaFrame.common.util.regex.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,13 +17,15 @@ import java.util.List;
 public class FileUtil {
 	private String lineSeparator = System.getProperty("line.separator");
 
-	public static String projectPah() {
+	public static String path() {
 		String path = System.getProperty("user.dir") + File.separator + "src"
-				+ File.separator + "test" + File.separator + "java"
+//				+ File.separator + "test" + File.separator + "java"
 				+ File.separator + "com" + File.separator + "cn"
 				+ File.separator + "javaFrame" + File.separator
 				+ File.separator + "common" + File.separator
-				+ File.separator + "util" + File.separator;
+				+ File.separator + "util" + File.separator
+				+ File.separator + "regex" + File.separator
+				+ File.separator + "test" + File.separator;
 		return path;
 	}
 
