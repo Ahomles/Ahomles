@@ -1,4 +1,4 @@
-package com.cn.javaFrame.common.util1.json;
+package com.cn.javaFrame.common.util1.json.gson;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

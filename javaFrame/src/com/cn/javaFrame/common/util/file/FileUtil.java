@@ -17,6 +17,16 @@ import java.util.List;
 public class FileUtil {
 	private String lineSeparator = System.getProperty("line.separator");
 
+	public static String path() {
+		String path = System.getProperty("user.dir") + File.separator + "src"
+				+ File.separator + "main" + File.separator + "java"
+				+ File.separator + "com" + File.separator + "asiainfo"
+				+ File.separator + "boss" + File.separator
+				+ File.separator + "client" + File.separator
+				+ File.separator + "interfaces" + File.separator;
+		return path;
+	}
+	
 	public static String projectPah() {
 		String path = System.getProperty("user.dir") + File.separator + "src"
 				+ File.separator + "test" + File.separator + "java"

@@ -15,5 +15,12 @@
 	<classpathentry kind="lib" path="lib/antlr-2.7.4.jar"/>
 	<classpathentry kind="lib" path="lib/chardet-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jsonlib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/jsonlib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/jsonlib/json-lib-1.1-jdk13-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-2.5.1-final-2.5.1-final-20040804.jar"/>
+	<classpathentry kind="lib" path="lib/jxl-hn.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/json/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/json/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
