@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="project" default="compile_auth">
+	<property file="build.properties" />
+
+	<target name="init">
+		<delete dir="${build.tmp.dir}" />
+		<delete dir="${build.dist.dir}" />
+		<mkdir dir="${build.dist.dir}" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/config" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/lib" />
+		<mkdir dir="${build.tmp.dir}/${project.oppf.name}" />
+		<mkdir dir="${build.tmp.dir}/${project.oppf.name}/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.oppf.name}/webroot/WEB-INF/lib" />
+		<mkdir dir="${build.tmp.dir}/${project.oppf.name}/webroot/WEB-INF/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.aopdev.name}" />
+		<mkdir dir="${build.tmp.dir}/${project.aopdev.name}/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.aopdev.name}/webroot/WEB-INF/lib" />
+		<mkdir dir="${build.tmp.dir}/${project.aopdev.name}/webroot/WEB-INF/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.aopoauth.name}" />
+		<mkdir dir="${build.tmp.dir}/${project.aopoauth.name}/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.aopoauth.name}/webroot/WEB-INF/lib" />
+		<mkdir dir="${build.tmp.dir}/${project.aopoauth.name}/webroot/WEB-INF/classes" />
+	</target>
+
+
+	<target name="compile_esb" depends="init">
+		<echo message="开始编译java - esb" />
+		<javac fork="true" srcdir="${build.svn.dir}/aiesb/src;${build.svn.dir}/aiesb/test" destdir="${build.tmp.dir}/${project.esb.name}/classes" debug="true" debuglevel="lines,vars,source" nowarn="true" includeAntRuntime="no" failonerror="true" >
+			<!--<compilerarg line="-encoding UTF-8 -J-Xms1024m -J-Xmx1024m"/>-->
+			<classpath>
+				<fileset dir="${build.svn.dir}/aiesb/lib/activemq" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/apache" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/appframe" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/jetty" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/lucene" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/other" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/runtime" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/topeng" includes="*.jar" />
+				<fileset dir="${build.lib.dir}" includes="*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+			<!--<exclude name="test/**/*.*" />-->
+			<!--<exclude name="**/test/*.*" />-->
+			<exclude name="example/**/*.*" />
+		</javac>
+		
+		<echo message="编译完成" />
+
+		<echo message="将编译好的Class打成包" />
+		<jar destfile="${build.dist.dir}/${project.esb.name}.jar">
+			<fileset dir="${build.tmp.dir}/${project.esb.name}/classes">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+		<echo message="打包完成" />
+	</target>
+	
+	<target name="process" depends="compile_esb">
+		<echo message="复制文件" />
+		<copy todir="${build.tmp.dir}/${project.esb.name}/config">
+			<fileset dir="${build.svn.dir}/aiesb/config" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.esb.name}/config" overwrite="true">
+			<fileset dir="${build.config.dir}/${project.esb.name}/config" includes="**/*"/>
+		</copy>
+		
+		<copy todir="${build.tmp.dir}/${project.esb.name}/lib">
+			<fileset file="${build.dist.dir}/${project.esb.name}.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/activemq" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/apache" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/appframe" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/jetty" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/lucene" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/other" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/runtime" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/topeng" includes="*.jar" />
+			<!--<fileset dir="${build.lib.dir}" includes="tools.jar" />-->
+		</copy>
+		<jar destfile="${build.dist.dir}/${project.esb.name}_config.jar" basedir="${build.tmp.dir}/${project.esb.name}/config"/>
+		<jar destfile="${build.dist.dir}/${project.esb.name}_lib.jar" basedir="${build.tmp.dir}/${project.esb.name}/lib"/>
+	</target>
+		
+	<target name="compile_oppf" depends="init">
+		<echo message="开始编译java - oppf" />
+		<javac fork="true" srcdir="${build.svn.dir}/aopopr/src" destdir="${build.tmp.dir}/${project.oppf.name}/classes" debug="true" debuglevel="lines,vars,source" nowarn="true" includeAntRuntime="no" failonerror="true" >
+		<compilerarg line="-encoding UTF-8 -J-Xms1024m -J-Xmx1024m"/>
+			<classpath>
+				<fileset dir="${build.svn.dir}/aopopr/lib" includes="*.jar" />
+				<fileset dir="${build.lib.dir}" includes="*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+			<!--<exclude name="test/**/*.*" />-->
+			<!--<exclude name="**/test/*.*" />-->
+			<exclude name="example/**/*.*" />
+		</javac>
+		
+		<echo message="编译完成" />
+
+		<echo message="将编译好的Class打成包" />
+		<jar destfile="${build.dist.dir}/${project.oppf.name}.jar">
+			<fileset dir="${build.tmp.dir}/${project.oppf.name}/classes">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+		<echo message="打包完成" />
+
+	</target>
+
+
+	<target name="aopopr_war" depends="compile_oppf">
+		<echo message="复制文件" />
+		<copy todir="${build.tmp.dir}/${project.oppf.name}/webroot/WEB-INF/classes">
+			<fileset dir="${build.svn.dir}/aopopr/config" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.oppf.name}/webroot/WEB-INF/classes" overwrite="true">
+			<fileset dir="${build.config.dir}/aopopr/config" includes="**/*"/>
+		</copy>
+		
+		<copy todir="${build.tmp.dir}/${project.oppf.name}/webroot" overwrite="true">
+			<fileset dir="${build.svn.dir}/aopopr/html" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.oppf.name}/webroot/WEB-INF/lib">
+			<fileset file="${build.dist.dir}/${project.oppf.name}.jar" />
+			<fileset dir="${build.svn.dir}/aopopr/lib" includes="*.jar" />
+			<!--<fileset dir="${build.lib.dir}" includes="tools.jar" />-->
+		</copy>
+
+		<echo message="复制文件完成" />
+
+		<echo message="生成war" />
+		<jar destfile="${build.dist.dir}/${project.oppf.name}.war" basedir="${build.tmp.dir}/${project.oppf.name}/webroot">
+		</jar>
+		<echo message="生成war完成" />
+	</target>
+
+		
+	<target name="compile_dev" depends="init">
+		<echo message="开始编译java - dev" />
+		<javac fork="true" srcdir="${build.svn.dir}/aopdev/src" destdir="${build.tmp.dir}/${project.aopdev.name}/classes" debug="true" debuglevel="lines,vars,source" nowarn="true" includeAntRuntime="no" failonerror="true" >
+		<compilerarg line="-encoding UTF-8 -J-Xms1024m -J-Xmx1024m"/>
+			<classpath>
+				<fileset dir="${build.svn.dir}/aopdev/lib" includes="*.jar" />
+				<fileset dir="${build.lib.dir}" includes="*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+			<!--<exclude name="test/**/*.*" />-->
+			<!--<exclude name="**/test/*.*" />-->
+			<exclude name="example/**/*.*" />
+		</javac>
+		
+		<echo message="编译完成" />
+
+		<echo message="将编译好的Class打成包" />
+		<jar destfile="${build.dist.dir}/${project.aopdev.name}.jar">
+			<fileset dir="${build.tmp.dir}/${project.aopdev.name}/classes">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+		<echo message="打包完成" />
+
+	</target>
+
+
+	<target name="aopdev_war" depends="compile_dev">
+		<echo message="复制文件" />
+		<copy todir="${build.tmp.dir}/${project.aopdev.name}/webroot/WEB-INF/classes">
+			<fileset dir="${build.svn.dir}/aopdev/config" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.aopdev.name}/webroot/WEB-INF/classes" overwrite="true">
+			<fileset dir="${build.config.dir}/aopdev/config" includes="**/*"/>
+		</copy>
+		
+		<copy todir="${build.tmp.dir}/${project.aopdev.name}/webroot" overwrite="true">
+			<fileset dir="${build.svn.dir}/aopdev/html" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.aopdev.name}/webroot/WEB-INF/lib">
+			<fileset file="${build.dist.dir}/${project.aopdev.name}.jar" />
+			<fileset dir="${build.svn.dir}/aopdev/lib" includes="*.jar" />
+			<!--<fileset dir="${build.lib.dir}" includes="tools.jar" />-->
+		</copy>
+
+		<echo message="复制文件完成" />
+
+		<echo message="生成war" />
+		<jar destfile="${build.dist.dir}/${project.aopdev.name}.war" basedir="${build.tmp.dir}/${project.aopdev.name}/webroot">
+		</jar>
+		<echo message="生成war完成" />
+	</target>
+
+	
+	<target name="compile_auth" depends="aopdev_war">
+		<echo message="开始编译java - dev" />
+		<javac fork="true" srcdir="${build.svn.dir}/aopoauth/src" destdir="${build.tmp.dir}/${project.aopoauth.name}/classes" debug="true" debuglevel="lines,vars,source" nowarn="true" includeAntRuntime="no" failonerror="true" >
+		<!--<compilerarg line="-encoding UTF-8 -J-Xms1024m -J-Xmx1024m"/>-->
+			<classpath>
+				<fileset dir="${build.svn.dir}/aopoauth/lib" includes="*.jar" />
+				<fileset dir="${build.lib.dir}" includes="*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+			<!--<exclude name="test/**/*.*" />-->
+			<!--<exclude name="**/test/*.*" />-->
+			<exclude name="example/**/*.*" />
+		</javac>
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/classes/META-INF">
+			<fileset dir="${build.svn.dir}/aopoauth/src/META-INF" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/classes/com/asiainfo/ext/extframe/oauth2" overwrite="true">
+			<fileset dir="${build.svn.dir}/aopoauth/src/com/asiainfo/ext/extframe/oauth2" includes="*.xsd"/>
+		</copy>
+		
+		<echo message="编译完成" />
+
+		<echo message="将编译好的Class打成包" />
+		<jar destfile="${build.dist.dir}/${project.aopoauth.name}.jar">
+			<fileset dir="${build.tmp.dir}/${project.aopoauth.name}/classes">
+				<include name="**/*.class" />
+				<include name="**/*.handlers" />
+				<include name="**/*.schemas" />
+				<include name="**/*.xsd" />
+			</fileset>
+		</jar>
+		<echo message="打包完成" />
+
+	</target>
+
+	<target name="auth_war" depends="compile_auth">
+		<echo message="复制文件" />
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/webroot/WEB-INF/classes">
+			<fileset dir="${build.svn.dir}/aopoauth/config" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/webroot/WEB-INF/classes" overwrite="true">
+			<fileset dir="${build.config.dir}/aopoauth/config" includes="**/*"/>
+		</copy>
+		
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/webroot" overwrite="true">
+			<fileset dir="${build.svn.dir}/aopoauth/html" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.aopoauth.name}/webroot/WEB-INF/lib">
+			<fileset file="${build.dist.dir}/${project.aopoauth.name}.jar" />
+			<fileset dir="${build.svn.dir}/aopoauth/lib" includes="*.jar" />
+			<!--<fileset dir="${build.lib.dir}" includes="tools.jar" />-->
+		</copy>
+
+		<echo message="复制文件完成" />
+
+		<echo message="生成war" />
+		<jar destfile="${build.dist.dir}/${project.aopoauth.name}.war" basedir="${build.tmp.dir}/${project.aopoauth.name}/webroot">
+		</jar>
+		<echo message="生成war完成" />
+	</target>
+
+</project>
+

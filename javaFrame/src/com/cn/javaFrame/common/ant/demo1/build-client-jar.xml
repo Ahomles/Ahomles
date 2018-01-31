@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="project" default="compile_dacellmonitorclient">
+	<property file="build.properties" />
+	<property name="project.dacellmonitorclient.name" value="dacellmonitorclient"/>
+
+	<target name="init">
+		<delete dir="${build.dist.dir}/${project.dacellmonitorclient.name}" />
+		<mkdir dir="${build.dist.dir}/${project.dacellmonitorclient.name}" />
+	</target>
+	
+	<target name="compile_dacellmonitorclient" depends="init">
+
+		<echo message="生成 MANIFEST.MF" />
+		<tstamp prefix="build.">
+			<format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+   	</tstamp>
+   	<manifest file="${build.dist.dir}/${project.dacellmonitorclient.name}/MANIFEST.MF">
+     	<attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+   	</manifest>
+		
+		<jar jarfile="${build.dist.dir}/${project.dacellmonitorclient.name}/dacellmonitorclient.jar" manifest="${build.dist.dir}/${project.dacellmonitorclient.name}/MANIFEST.MF">
+			<fileset dir="${build.svn.dir}/dacellmonitorclient/classes">
+ 				<include name="**/dacell/**/*.*"/>
+			</fileset>
+   	</jar>
+	</target>
+</project>

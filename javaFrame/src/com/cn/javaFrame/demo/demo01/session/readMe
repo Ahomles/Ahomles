@@ -1,0 +1,7 @@
+session的设计：
+
+SessionCasheFactory
+
+BaseSessionManager
+SessionManager
+Session

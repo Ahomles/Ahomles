@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="project" default="process">
+	<property file="build.properties" />
+
+	<target name="init">
+		<delete dir="${build.dist.dir}/${project.esb.name}" />
+		<mkdir dir="${build.dist.dir}/${project.esb.name}" />
+		
+		<delete dir="${build.tmp.dir}" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/classes" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/config" />
+		<mkdir dir="${build.tmp.dir}/${project.esb.name}/lib" />
+	</target>
+	
+	<target name="init_logExp" description="Generates a report of code convention violations." depends="init">
+  	<taskdef  resource="checkstyletask.properties" classpath="${checkstyle.dir}\checkstyle-all-4.4.jar"/>
+    <checkstyle failonviolation="false" config="${checkstyle.dir}\sun_checks_eclipse.xml">  
+			<fileset dir="${build.svn.dir}/aiesb/src" includes="com\asiainfo\common\**\*.java" excludes="com\asiainfo\common\**\bo\*.java"/>  
+			<formatter type="plain" />
+			<formatter type="xml" toFile="${checkstyle.dir}\checkstyle_report.xml" />  
+    </checkstyle>  	
+	</target>
+
+	<target name="compile_esb" depends="init">
+		<echo message="开始编译java - esb" />
+		<javac fork="true" srcdir="${build.svn.dir}/aiesb/src;${build.svn.dir}/aiesb/test" destdir="${build.tmp.dir}/${project.esb.name}/classes" debug="true" debuglevel="lines,vars,source" nowarn="true" includeAntRuntime="no" failonerror="true" >
+			<!--<compilerarg line="-encoding UTF-8 -J-Xms1024m -J-Xmx1024m"/>-->
+			<classpath>
+				<fileset dir="${build.svn.dir}/aiesb/lib/activemq" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/apache" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/axis2" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/appframe" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/jetty" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/lucene" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/other" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/runtime" includes="*.jar" />
+				<fileset dir="${build.svn.dir}/aiesb/lib/topeng" includes="*.jar" />
+				<fileset dir="${build.lib.dir}" includes="*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+			<!--<exclude name="test/**/*.*" />-->
+			<!--<exclude name="**/test/*.*" />-->
+			<exclude name="example/**/*.*" />
+		</javac>
+		
+		<echo message="编译完成" />
+
+		<echo message="将编译好的Class打成包" />
+		<jar destfile="${build.dist.dir}/${project.esb.name}/${project.esb.name}.jar">
+			<fileset dir="${build.tmp.dir}/${project.esb.name}/classes">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+		<echo message="打包完成" />
+		</target>
+		
+	<target name="process" depends="compile_esb">
+		<echo message="复制文件" />
+		<copy todir="${build.tmp.dir}/${project.esb.name}/config">
+			<fileset dir="${build.svn.dir}/aiesb/config" includes="**/*"/>
+		</copy>
+
+		<copy todir="${build.tmp.dir}/${project.esb.name}/config" overwrite="true">
+			<fileset dir="${build.config.dir}/${project.esb.name}/config" includes="**/*"/>
+		</copy>
+		
+		<copy todir="${build.tmp.dir}/${project.esb.name}/lib">
+			<fileset file="${build.dist.dir}/${project.esb.name}/${project.esb.name}.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/activemq" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/apache" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/axis2" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/appframe" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/jetty" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/lucene" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/other" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/runtime" includes="*.jar" />
+			<fileset dir="${build.svn.dir}/aiesb/lib/topeng" includes="*.jar" />
+			<!--<fileset dir="${build.lib.dir}" includes="tools.jar" />-->
+		</copy>
+		<jar destfile="${build.dist.dir}/${project.esb.name}/${project.esb.name}_config.jar" basedir="${build.tmp.dir}/${project.esb.name}/config"/>
+		<jar destfile="${build.dist.dir}/${project.esb.name}/${project.esb.name}_lib.jar" basedir="${build.tmp.dir}/${project.esb.name}/lib"/>
+	</target>
+</project>
+

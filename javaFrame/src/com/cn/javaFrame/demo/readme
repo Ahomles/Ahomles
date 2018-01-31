@@ -1,0 +1,41 @@
+javaFrame:架构是设计模式的混合使用
+1.cache	
+    CacheFactory
+    CacheConfig  [ cache(实体) ，CacheSource(路由)]
+	ICache 接口[isCacheLoaded,refresh,getObject,getAll,containsKey] 
+	CacheSource [ cache]  --router,路由从哪里去
+	
+	AccelerateFactory
+	
+	CacheManager
+2.callback
+
+3.common
+
+4.config
+
+5.exception
+
+6.listenter
+
+7.logger
+
+8.proxy
+   ProxyFactory
+   AOPProxy
+   BaseProxy
+   ServletProxy
+   
+   
+   
+
+9.router
+
+10.service
+
+11.transaction
+
+12.xml
+
+13.session
+

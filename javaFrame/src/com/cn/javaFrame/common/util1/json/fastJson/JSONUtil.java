@@ -46,6 +46,6 @@ public class JSONUtil {
                 config.registerJsonValueProcessor(cls, processor);  
             }  
         }  
-        return JSONObject.fromObject(obj, config);  
+        return JSONObject.fromObject(obj);  
     }  
 }  

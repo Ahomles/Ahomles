@@ -1,9 +1,10 @@
-package com.cn.javaFrame.common.util.file;
+package com.cn.javaFrame.common.utilsIO.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,61 +12,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileUtil {
 	private String lineSeparator = System.getProperty("line.separator");
 
-	public static String path() {
-		String path = System.getProperty("user.dir") + File.separator + "src"
-				+ File.separator + "main" + File.separator + "java"
-				+ File.separator + "com" + File.separator + "asiainfo"
-				+ File.separator + "boss" + File.separator
-				+ File.separator + "client" + File.separator
-				+ File.separator + "interfaces" + File.separator;
-		return path;
-	}
 	
 	public static String projectPah() {
 		String path = System.getProperty("user.dir") + File.separator + "src"
-//				+ File.separator + "test" + File.separator + "java"
-				+ File.separator + "com" + File.separator + "cn"
-				+ File.separator + "javaFrame" 
-				+ File.separator + "common" 
-				+ File.separator + "util" 
-				+ File.separator + "file" + File.separator;
+				+ File.separator + "test" + File.separator + "java"
+				+ File.separator + "com" + File.separator + "asiainfo"
+				+ File.separator + "crm" + File.separator;
 		return path;
 	}
-
-	public static List getFiles(String dirpath) {
-		List<String> filelist = new ArrayList<String>();
-		File root = new File(dirpath);
-		File[] files = root.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				List<String> filelistSon=getFiles(file.getAbsolutePath());//递归
-				if(null!=filelistSon&&filelistSon.size()>0)
-					filelist.addAll(filelistSon);
-			} else {
-				filelist.add(file.getAbsolutePath());
-			}
-		}
-		return filelist;
+	public static String logPah() throws IOException {
+		String path = System.getProperty("user.dir");
+//		int index=path.lastIndexOf(File.separator);
+//		path=path.substring(0,index) + File.separator+"log.txt";
+		path=path+File.separator+"log.txt";
+//		FileUtil.writeFileContent(path, path);
+		return path;
 	}
-	public static List getDirs(String dirpath) {
-		List<String> dirlist = new ArrayList<String>();
-		File root = new File(dirpath);
-		File[] files = root.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				List<String> dirlistSon=getFiles(file.getAbsolutePath());//递归
-				if(null!=dirlistSon&&dirlistSon.size()>0)
-					dirlist.addAll(dirlistSon);
-				dirlist.add(file.getAbsolutePath());
-			}
-		}
-		return dirlist;
+	public static void main(String[] args) {
+//		System.out.println(logPah());
 	}
 
 	public static File createFile(String path) {
@@ -118,7 +86,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 删除目录下的所有文件,遍历文件删除
+	 * 删除目录下的�?��文件,遍历文件删除
 	 * 
 	 * @param dir
 	 * @return
@@ -134,7 +102,7 @@ public class FileUtil {
 			}
 		}
 		System.out.println(dir);
-		// 目录此时为空，可以删除
+		// 目录此时为空，可以删�?
 		return dir.delete();
 	}
 
@@ -144,7 +112,7 @@ public class FileUtil {
 	 * @param filepath
 	 *            文件路径
 	 * @param newstr
-	 *            内容字符串
+	 *            内容字符�?
 	 * @return
 	 * @throws IOException
 	 */
@@ -160,7 +128,8 @@ public class FileUtil {
 		FileOutputStream fos = null;
 		PrintWriter pw = null;
 		try {
-			File file = new File(filepath);// 文件路径(包括文件名称)
+//			File file = new File(filepath);// 文件路径(包括文件名称)
+			File file =createFile(filepath); 
 			// 将文件读入输入流
 			fis = new FileInputStream(file);
 			isr = new InputStreamReader(fis);
@@ -170,7 +139,7 @@ public class FileUtil {
 			// 文件原有内容
 			for (int i = 0; (temp = br.readLine()) != null; i++) {
 				buffer.append(temp);
-				// 行与行之间的分隔符 相当于“\n”
+				// 行与行之间的分隔�?相当于�?\n�?
 				buffer = buffer.append(System.getProperty("line.separator"));
 			}
 			buffer.append(filein);
@@ -254,7 +223,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 读取某个目录下的所有文件
+	 * 读取某个目录下的�?��文件
 	 * 
 	 * @param dirpath
 	 * @return
@@ -265,94 +234,12 @@ public class FileUtil {
 		File[] tempList = file.listFiles();
 		for (int i = 0; i < tempList.length; i++) {
 			if (tempList[i].isFile()) {
-//				String filePath = tempList[i].getPath();
-//				int tem = filePath.indexOf("com");
-//				filePath = filePath.substring(tem);
-//				System.out.println(filePath.replace("\\", "/"));
-				System.out.println(tempList[i].getName());
+				String filePath = tempList[i].getPath();
+				int tem = filePath.indexOf("com");
+				filePath = filePath.substring(tem);
+				System.out.println(filePath.replace("\\", "/"));
 			}
 		}
 		return bool;
 	}
-
-	/**
-	 * 拷贝文件的同时修改第一行数据 flag = false：修改，true：添加
-	 * 
-	 * @param srcPath
-	 * @param destPath
-	 * @param firstLine
-	 * @param flag
-	 * @return
-	 * @throws IOException
-	 */
-	public static boolean moveCopyFile(String srcPath, String destPath,
-			String firstLine, boolean flag) {
-		Boolean bool = false;
-		File oldfile = new File(srcPath);
-		if (oldfile.exists()) {
-			File newfile = createFile(destPath);// 创建目标文件
-			BufferedReader in = null;
-			BufferedWriter out = null;
-			try {
-				in = new BufferedReader(new FileReader(oldfile));
-				out = new BufferedWriter(new FileWriter(newfile));
-				String str;
-				str = in.readLine();
-				if (str != null) {
-					out.write(firstLine);
-					out.newLine();// 换行
-					if (flag) {
-						out.write(str);
-						out.newLine();// 换行
-					}
-				}
-				if (srcPath.contains("Bean")) {
-					while ((str = in.readLine()) != null) {
-						if (str.contains(getBoName(srcPath, firstLine))) {
-							out.write(getBoPath(srcPath, firstLine));
-							out.newLine();// 换行
-						} else {
-							out.write(str);
-							out.newLine();// 换行
-						}
-					}
-				} else {
-					while ((str = in.readLine()) != null) {
-						out.write(str);
-						out.newLine();// 换行
-					}
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					out.close();
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return bool;
-	}
-
-	private static String getBoPath(String srcPath, String firstLine) {
-		String boTemp = srcPath.substring(0, srcPath.lastIndexOf("."));
-		boTemp = boTemp.substring(srcPath.lastIndexOf("\\"));
-		boTemp = boTemp.substring(1, boTemp.indexOf("Bean"));
-		String boPath = firstLine.substring(8, firstLine.length() - 1) + "."
-				+ boTemp;
-		boPath = "\t" + "private static String  m_boName = \"" + boPath + "\""
-				+ ";";
-		System.out.println(boPath);
-		return boPath;
-	}
-
-	private static String getBoName(String srcPath, String firstLine) {
-		String boTemp = srcPath.substring(0, srcPath.lastIndexOf("."));
-		boTemp = boTemp.substring(srcPath.lastIndexOf("\\"));
-		boTemp = "bo." + boTemp.substring(1, boTemp.indexOf("Bean"));
-		return boTemp;
-	}
-
 }
